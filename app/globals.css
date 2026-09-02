@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-manrope);
+
+  --color-cream: #f7f2ea;
+  --color-paper: #fffdfa;
+  --color-ink: #2a231e;
+  --color-ink-soft: #6d6259;
+  --color-ink-faint: #a89c8f;
+  --color-accent: #a6493c;
+  --color-accent-soft: #f0ddd2;
+  --color-line: #e4d9cb;
+
+  /* Soft tints derived from the Beatriz Lucárdians tooth mark — used sparingly
+     as decorative blobs so the site nods to the logo without competing with it. */
+  --color-blush: #f6d9e4;
+  --color-blush-soft: #fbeef3;
+  --color-sage: #bcdac6;
+  --color-sage-soft: #e7f2ea;
+  --color-gold: #f6d48b;
+  --color-gold-soft: #fbefd9;
+  --color-sky: #aecbea;
+  --color-sky-soft: #e7eff8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+.font-serif-display {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
