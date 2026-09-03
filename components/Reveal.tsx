@@ -22,7 +22,10 @@ export default function Reveal({ children, className = "", delay = 0 }: RevealPr
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      // threshold 0 (not e.g. 0.15) so this still fires for elements taller
+      // than the viewport itself — a 15% area requirement can never be met
+      // by a tall block (like the gallery carousel) on a short viewport.
+      { threshold: 0, rootMargin: "0px 0px -5% 0px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
