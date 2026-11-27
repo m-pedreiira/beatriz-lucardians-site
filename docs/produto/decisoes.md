@@ -7,3 +7,4 @@
 | 2026-11-26 | Link do Lattes preenchido com o endereço que está no design. | Resolve uma pendência do README. |
 | 2026-11-26 | O design só traz 3 fotos para 6 posições da galeria; as outras 3 usam fotos que já estavam no projeto. | Manter os 6 itens do carrossel. |
 | 2026-11-26 | Layout de celular e tablet adaptado a partir do desktop. | O design não tem versão para telas menores. |
+| 2026-11-26 | Corrigidos 5 erros de digitação e concordância nos textos de procedimentos e de "Envelhecimento"; nesses pontos o site difere do Figma. | Pedido do dono do projeto. |

@@ -79,7 +79,7 @@ export const lifeStages: LifeStage[] = [
   {
     title: "Envelhecimento",
     side: "right",
-    text: "Atenção às mudanças da saúde bucal, manutenção dos dentes, avaliação de próteses e cuidados individualizados para preservar o conforto, a função e a qualidade de vida",
+    text: "Atenção às mudanças da saúde bucal, manutenção dos dentes, avaliação de próteses e cuidados individualizados para preservar o conforto, a função e a qualidade de vida.",
     image: { src: "/design/phase-elderly.webp", width: 773, height: 516, alt: "Ilustração de uma senhora sorrindo" },
   },
 ];
@@ -142,17 +142,17 @@ export const procedureColumns: Procedure[][] = [
     },
     {
       title: "Próteses",
-      description: "Reabilitações protéticas pensada para cada caso: coroa, peça, roach, dentaduras e outras soluções..",
+      description: "Reabilitações protéticas pensadas para cada caso: coroa, peça, roach, dentaduras e outras soluções.",
       dot: "sky",
     },
     {
       title: "Laserterapia",
-      description: "Aplicação de laser de baixa potência como suporte terapeutico.",
+      description: "Aplicação de laser de baixa potência como suporte terapêutico.",
       dot: "sky",
     },
     {
       title: "Placa de bruxismo",
-      description: "Placa de bruxismo individualizadas, sob medida e ajustadas como parte do tratamento do bruxismo.",
+      description: "Placa de bruxismo individualizada, sob medida e ajustada como parte do tratamento do bruxismo.",
       dot: "blush",
     },
     {
