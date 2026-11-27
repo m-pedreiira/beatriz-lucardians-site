@@ -4,54 +4,15 @@ import { CONTACT, SITE } from "@/lib/site";
 import Eyebrow from "./Eyebrow";
 import Reveal from "./Reveal";
 
-const credentials = [
-  {
-    label: "UFMG",
-    detail: "Graduação em Odontologia, 2023",
-    icon: (
-      <path
-        d="M2 7l9-4 9 4-9 4-9-4Zm4 2.2V14c0 1.4 2.6 3 5 3s5-1.6 5-3V9.2M18 8v6"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    ),
-  },
-  {
-    label: SITE.cro,
-    detail: "Registro profissional ativo",
-    icon: (
-      <path
-        d="M12 2.5l7 3v5.2c0 4.6-3 8.3-7 9.8-4-1.5-7-5.2-7-9.8V5.5l7-3Zm-3.3 9.3 2.2 2.2 4.4-4.4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    ),
-  },
-  {
-    label: "Pesquisa científica",
-    detail: "Iniciação científica e publicações",
-    icon: (
-      <path
-        d="M9 2h6M10 2v5.2L4.8 17a2 2 0 0 0 1.8 3h10.8a2 2 0 0 0 1.8-3L14 7.2V2M7.5 14h9"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    ),
-  },
+const highlights = [
+  { label: "UFMG", detail: "Graduação em Odontologia", icon: "/design/hero-icon-ufmg.svg", pad: true },
+  { label: SITE.cro, detail: "Registro profissional ativo", icon: "/design/hero-icon-cro.svg", pad: true },
+  { label: "Odontologia inclusiva", detail: "Cuidado para todos", icon: "/design/hero-icon-inclusive.webp", pad: false },
 ];
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden bg-cream pt-32 pb-20 md:pt-40 md:pb-28">
+    <section id="top" className="relative overflow-hidden bg-cream pt-28 pb-6 md:pt-40">
       <div
         className="pointer-events-none absolute -top-24 -left-32 h-80 w-80 rounded-full bg-blush-soft blur-3xl"
         aria-hidden="true"
@@ -61,32 +22,35 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 md:grid-cols-[1.05fr_0.95fr] md:gap-10 md:px-10">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 md:grid-cols-[542fr_490fr] md:gap-10 md:px-10">
         <div className="order-2 md:order-1">
           <Reveal>
-            <Eyebrow>Cirurgiã-dentista · Belo Horizonte</Eyebrow>
-            <h1 className="font-serif-display text-[2.6rem] leading-[1.08] text-ink sm:text-6xl md:text-[3.6rem]">
-              Odontologia que cuida de pessoas — com leveza, ética e conexão.
+            <Eyebrow className="!mb-0 text-sm font-bold !tracking-[0.2em] text-coral" ruleClassName="bg-coral">
+              Cirurgiã-dentista · Belo Horizonte
+            </Eyebrow>
+            <h1 className="pt-4 font-display text-[2.5rem] leading-[1.08] font-medium text-ink-soft sm:text-5xl lg:text-[3.6rem]">
+              Atendimento odontológico para toda a família
             </h1>
-            <p className="mt-6 max-w-md font-sans text-lg leading-relaxed text-ink-soft">
-              Sou a Dra. Beatriz Lucárdians. Acredito em uma Odontologia próxima, atenciosa e
-              construída em confiança — para você e sua família, em cada etapa do cuidado.
+            <p className="max-w-md pt-6 font-sans text-lg leading-[1.625] text-ink-soft">
+              Cuidar de um sorriso é também cuidar de quem existe por trás dele. Independente da fase da vida,
+              cada atendimento é acolhedor e individualizado, pensado para tornar a experiência no dentista
+              mais leve, sempre respeitando as necessidades e o tempo de cada paciente.
             </p>
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4 pt-9">
               <a
                 href={CONTACT.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-ink px-7 py-3.5 font-sans text-[0.95rem] text-cream transition-colors hover:bg-accent"
+                className="rounded-full bg-mint px-7 py-3.5 font-sans text-[0.95rem] font-bold text-cream transition-[filter] hover:brightness-90"
               >
-                Agendar pelo WhatsApp
+                Conversar no WhatsApp
               </a>
               <a
                 href="#sobre"
-                className="font-sans text-[0.95rem] text-ink underline decoration-line underline-offset-8 transition-colors hover:decoration-accent"
+                className="font-sans text-[0.98rem] font-bold text-ink underline transition-colors hover:text-accent"
               >
                 Conheça a Dra. Beatriz
               </a>
@@ -94,44 +58,43 @@ export default function Hero() {
           </Reveal>
 
           <Reveal delay={220}>
-            <dl className="mt-12 grid max-w-lg grid-cols-1 gap-5 border-t border-line pt-8 sm:grid-cols-3 sm:gap-4">
-              {credentials.map((item) => (
-                <div key={item.label} className="flex items-start gap-3">
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="mt-0.5 shrink-0 text-accent"
-                    aria-hidden="true"
-                  >
-                    {item.icon}
-                  </svg>
-                  <div>
-                    <dt className="font-sans text-sm font-medium text-ink">{item.label}</dt>
-                    <dd className="font-sans text-[0.8rem] text-ink-soft">{item.detail}</dd>
+            <div className="pt-12">
+              <dl className="grid max-w-lg grid-cols-1 gap-4 border-t border-line pt-8 pb-1.5 sm:grid-cols-3">
+                {highlights.map((item) => (
+                  <div key={item.label} className="flex items-start gap-3">
+                    <Image
+                      src={withBasePath(item.icon)}
+                      alt=""
+                      width={22}
+                      height={22}
+                      className={`shrink-0 ${item.pad ? "mt-0.5" : ""}`}
+                    />
+                    <div className="min-w-0">
+                      <dt className="font-sans text-sm font-medium text-ink">{item.label}</dt>
+                      <dd className="font-sans text-[0.8rem] leading-[1.2rem] text-ink-soft">{item.detail}</dd>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </dl>
+                ))}
+              </dl>
+            </div>
           </Reveal>
         </div>
 
         <div className="order-1 md:order-2">
           <Reveal delay={150}>
-            <div className="relative mx-auto max-w-md md:max-w-none">
+            <div className="relative mx-auto max-w-md pr-4 pb-4 md:max-w-none md:pr-0 md:pb-0">
               <div
-                className="absolute -right-4 -bottom-4 aspect-[4/5] w-full rounded-[2rem] bg-accent/85 md:-right-6 md:-bottom-6"
+                className="absolute top-4 right-0 bottom-0 left-4 rounded-[2rem] bg-honey/85 md:top-6 md:-right-6 md:-bottom-6 md:left-6"
                 aria-hidden="true"
               />
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-paper">
+              <div className="relative aspect-[490/613] w-full overflow-hidden rounded-[2rem] bg-paper">
                 <Image
-                  src={withBasePath("/images/portrait-coat.jpg")}
+                  src={withBasePath("/design/hero-portrait.jpg")}
                   alt="Dra. Beatriz Lucárdians, cirurgiã-dentista, sorrindo de jaleco"
-                  width={854}
-                  height={1280}
+                  width={1100}
+                  height={1650}
                   priority
-                  className="h-full w-full object-cover"
+                  className="absolute top-[-49%] left-[-5.7%] h-[180%] w-[150.09%] max-w-none"
                 />
               </div>
             </div>
@@ -142,11 +105,9 @@ export default function Hero() {
       <a
         href="#sobre"
         aria-label="Rolar para a seção Sobre"
-        className="relative mx-auto mt-16 hidden w-fit animate-bounce text-ink-faint transition-colors hover:text-accent motion-reduce:animate-none md:flex"
+        className="relative mx-auto mt-16 hidden w-fit animate-nudge motion-reduce:animate-none md:flex"
       >
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <Image src={withBasePath("/design/chevron-down.svg")} alt="" width={26} height={26} />
       </a>
     </section>
   );

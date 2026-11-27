@@ -1,58 +1,63 @@
 import Image from "next/image";
 import { withBasePath } from "@/lib/base-path";
-import { CONTACT, LATTES_URL, NAV_LINKS, SITE } from "@/lib/site";
+import { CONTACT, NAV_LINKS, SITE } from "@/lib/site";
+
+const socials = [
+  { label: "WhatsApp", href: CONTACT.whatsapp },
+  { label: "Instagram", href: CONTACT.instagram },
+  { label: "TikTok", href: CONTACT.tiktok },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink py-16 text-cream/80">
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
-          <div className="flex items-start gap-4">
-            <Image
-              src={withBasePath("/logo/logo-badge.png")}
-              alt="Beatriz Lucárdians Odontologia"
-              width={1136}
-              height={1199}
-              className="h-14 w-auto opacity-95"
-            />
-            <div>
-              <p className="font-serif-display text-lg text-cream">{SITE.name}</p>
-              <p className="font-sans text-sm text-cream/60">{SITE.role}</p>
-              <p className="mt-1 font-sans text-xs text-cream/45">{SITE.cro}</p>
-            </div>
-          </div>
-
-          <nav className="flex flex-wrap gap-x-8 gap-y-3 font-sans text-sm">
-            {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="text-cream/70 hover:text-cream">
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex flex-col gap-3 font-sans text-sm">
-            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="text-cream/70 hover:text-cream">
-              WhatsApp
-            </a>
-            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="text-cream/70 hover:text-cream">
-              Instagram
-            </a>
-            <a href={CONTACT.tiktok} target="_blank" rel="noopener noreferrer" className="text-cream/70 hover:text-cream">
-              TikTok
-            </a>
-            {LATTES_URL && (
-              <a href={LATTES_URL} target="_blank" rel="noopener noreferrer" className="text-cream/70 hover:text-cream">
-                Currículo Lattes
-              </a>
-            )}
+    <footer className="bg-blue text-cream/70">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-10 px-7 pt-12 pb-10 lg:flex-row lg:items-start lg:justify-between lg:pr-[72px]">
+        <div className="flex items-start gap-6 xl:gap-10">
+          <Image
+            src={withBasePath("/logo/logo-badge.png")}
+            alt="Beatriz Lucárdians Odontologia"
+            width={1136}
+            height={1199}
+            className="h-auto w-[70px] opacity-95"
+          />
+          <div>
+            <p className="font-display text-[1.65rem] leading-[1.55] text-cream">{SITE.name}</p>
+            <p className="font-sans text-xl leading-[1.43] text-cream/60">{SITE.role}</p>
+            <p className="pt-1.5 font-sans text-[1.1rem] leading-[1.33] text-cream/45">{SITE.cro}</p>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-cream/10 pt-8 font-sans text-xs text-cream/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} {SITE.name}. Todos os direitos reservados.</p>
-          <p>{SITE.location}</p>
+        <nav className="flex flex-wrap gap-x-9 gap-y-3 font-sans text-base">
+          {NAV_LINKS.map((link) => (
+            <a key={link.href} href={link.href} className="hover:text-cream">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="flex flex-col gap-3.5 font-sans text-base">
+          {socials.map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-cream"
+            >
+              {social.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div className="border-t border-cream/10">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-2 px-7 py-4 font-sans text-cream/45 sm:flex-row sm:items-baseline sm:gap-6">
+          <p className="text-[1.15rem]">{SITE.location}</p>
+          <p className="text-xs">
+            © {year} {SITE.name}. Todos os direitos reservados.
+          </p>
         </div>
       </div>
     </footer>

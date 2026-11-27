@@ -30,19 +30,24 @@ export default function Header() {
         scrolled || open ? "bg-cream/95 shadow-[0_1px_0_0_var(--color-line)] backdrop-blur" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 md:px-10">
-        <Link href="#top" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-5 py-3 lg:px-6 min-[87.5rem]:py-[19px] min-[87.5rem]:pr-[25px] min-[87.5rem]:pl-[89px]">
+        <Link
+          href="#top"
+          className="block w-[270px] shrink overflow-hidden sm:w-[340px] lg:w-[330px] xl:w-[500px] min-[87.5rem]:w-[610px]"
+          onClick={() => setOpen(false)}
+        >
+          {/* The logo artwork only fills the left ~74% of its frame; the rest is clipped. */}
           <Image
-            src={withBasePath("/logo/logo-lockup.png")}
-            alt="Beatriz Lucárdians Odontologia"
-            width={1230}
-            height={726}
+            src={withBasePath("/design/logo-header.svg")}
+            alt="Beatriz Lucárdians Odontologia — CRO MG 69489"
+            width={829}
+            height={68}
             priority
-            className="h-14 w-auto md:h-16"
+            className="h-auto w-[135.9%] max-w-none"
           />
         </Link>
 
-        <nav className="hidden items-center gap-9 md:flex">
+        <nav className="hidden shrink-0 items-center gap-5 lg:flex xl:gap-8">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
@@ -56,7 +61,7 @@ export default function Header() {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-ink px-5 py-2.5 text-[0.9rem] text-cream transition-colors hover:bg-accent"
+            className="rounded-full bg-mint px-5 py-2.5 font-display text-[0.9rem] leading-[1.35rem] text-cream transition-[filter] hover:brightness-90"
           >
             Fale no WhatsApp
           </a>
@@ -67,7 +72,7 @@ export default function Header() {
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
           <span
             className={`block h-px w-6 bg-ink transition-transform ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
@@ -79,18 +84,18 @@ export default function Header() {
       </div>
 
       <div
-        className={`grid overflow-hidden bg-cream transition-[grid-template-rows] duration-300 ease-out md:hidden ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        className={`grid overflow-hidden bg-cream transition-[grid-template-rows,visibility] duration-300 ease-out lg:hidden ${
+          open ? "visible grid-rows-[1fr]" : "invisible grid-rows-[0fr]"
         }`}
       >
         <div className="overflow-hidden">
-          <nav className="flex flex-col gap-1 px-6 pb-8 pt-2">
+          <nav className="flex flex-col gap-1 px-6 pt-2 pb-8">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="border-b border-line py-4 font-serif-display text-xl text-ink"
+                className="border-b border-line py-4 font-display text-xl text-ink"
               >
                 {link.label}
               </a>
@@ -100,7 +105,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-6 rounded-full bg-ink px-5 py-3.5 text-center text-cream"
+              className="mt-6 rounded-full bg-mint px-5 py-3.5 text-center font-display text-cream"
             >
               Fale no WhatsApp
             </a>

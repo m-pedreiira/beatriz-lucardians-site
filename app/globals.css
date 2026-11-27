@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-serif: var(--font-fraunces);
+  --font-display: var(--font-livvic);
   --font-sans: var(--font-manrope);
 
   --color-cream: #f7f2ea;
   --color-paper: #fffdfa;
+  --color-sand: #faf5ef;
   --color-ink: #2a231e;
   --color-ink-soft: #6d6259;
   --color-ink-faint: #a89c8f;
@@ -13,20 +14,38 @@
   --color-accent-soft: #f0ddd2;
   --color-line: #e4d9cb;
 
-  /* Soft tints derived from the Beatriz Lucárdians tooth mark — used sparingly
-     as decorative blobs so the site nods to the logo without competing with it. */
+  /* Colors taken from the Beatriz Lucárdians tooth mark. */
+  --color-coral: #ed5d5b;
+  --color-blue: #5994cc;
+  --color-mint: #9fc7aa;
   --color-blush: #f6d9e4;
   --color-blush-soft: #fbeef3;
   --color-sage: #bcdac6;
-  --color-sage-soft: #e7f2ea;
   --color-gold: #f6d48b;
+  --color-honey: #ffcc6a;
   --color-gold-soft: #fbefd9;
   --color-sky: #aecbea;
   --color-sky-soft: #e7eff8;
+
+  --animate-nudge: nudge 2s ease-in-out infinite;
+
+  @keyframes nudge {
+    0%,
+    50%,
+    100% {
+      transform: translateY(0);
+    }
+    25%,
+    75% {
+      transform: translateY(6px);
+    }
+  }
 }
 
 html {
   scroll-behavior: smooth;
+  /* Keeps anchored sections clear of the fixed header. */
+  scroll-padding-top: 5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -39,16 +58,12 @@ body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  overflow-x: clip;
 }
 
 ::selection {
   background: var(--color-accent-soft);
   color: var(--color-ink);
-}
-
-.font-serif-display {
-  font-family: var(--font-serif);
-  font-optical-sizing: auto;
 }
 
 a:focus-visible,

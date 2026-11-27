@@ -5,26 +5,29 @@ export type GalleryImage = {
   width: number;
   height: number;
   alt: string;
+  /** Zoom/offset applied inside the carousel frame (the lightbox shows the full photo). */
+  crop?: { width: string; height: string; left: string; top: string };
 };
 
 export const galleryImages: GalleryImage[] = [
   {
-    src: withBasePath("/images/portrait-coat.jpg"),
-    width: 854,
-    height: 1280,
-    alt: "Dra. Beatriz Lucárdians sorrindo, vestindo jaleco com o brasão da Odontologia UFMG",
+    src: withBasePath("/design/gallery-1.jpg"),
+    width: 900,
+    height: 1600,
+    alt: "Dra. Beatriz Lucárdians brincando com uma criança no consultório",
   },
   {
     src: withBasePath("/images/clinical.jpg"),
     width: 541,
     height: 756,
-    alt: "Dra. Beatriz Lucárdians atendendo uma criança em consulta odontológica",
+    alt: "Dra. Beatriz Lucárdians ensinando higiene bucal com um boneco",
   },
   {
-    src: withBasePath("/images/portrait-pink.jpg"),
-    width: 854,
-    height: 1280,
-    alt: "Retrato da Dra. Beatriz Lucárdians",
+    src: withBasePath("/design/gallery-3.jpg"),
+    width: 1200,
+    height: 1600,
+    alt: "Dra. Beatriz Lucárdians atendendo uma criança na cadeira odontológica",
+    crop: { width: "145.87%", height: "145.87%", left: "-37.19%", top: "-11.18%" },
   },
   {
     src: withBasePath("/images/candid.jpg"),
@@ -45,3 +48,6 @@ export const galleryImages: GalleryImage[] = [
     alt: "Retrato da Dra. Beatriz Lucárdians",
   },
 ];
+
+/** Photo shown in the center when the page loads. */
+export const GALLERY_START = 1;

@@ -1,9 +1,10 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Timeline from "@/components/Timeline";
-import Services from "@/components/Services";
+import LifeStages from "@/components/LifeStages";
+import Procedures from "@/components/Procedures";
 import Gallery from "@/components/Gallery";
+import Faq from "@/components/Faq";
 import CtaBand from "@/components/CtaBand";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -15,9 +16,10 @@ export default function Home() {
       <main id="conteudo">
         <Hero />
         <About />
-        <Timeline />
-        <Services />
+        <LifeStages />
+        <Procedures />
         <Gallery />
+        <Faq />
         <CtaBand />
         <Contact />
       </main>

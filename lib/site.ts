@@ -1,7 +1,5 @@
 // Central configuration for links and identity used across the site.
-// Update LATTES_URL here once the Currículo Lattes public link is available —
-// the "Lattes" link is hidden automatically everywhere while this is empty.
-export const LATTES_URL = "";
+export const LATTES_URL = "http://lattes.cnpq.br/6703549166851467";
 
 export const SITE = {
   name: "Dra. Beatriz Lucárdians",
@@ -14,8 +12,8 @@ export const SITE = {
 };
 
 export const CONTACT = {
-  whatsapp: "https://wa.me/5531994241260",
-  whatsappDisplay: "(31) 99424-1260",
+  whatsapp: "https://wa.me/5531984259900",
+  whatsappDisplay: "(31) 98425-9900",
   instagram: "https://www.instagram.com/drabeatrizlucardians/",
   instagramDisplay: "@drabeatrizlucardians",
   tiktok: "https://www.tiktok.com/@drabialucardians",

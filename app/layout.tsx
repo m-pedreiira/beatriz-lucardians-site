@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Livvic, Manrope } from "next/font/google";
 import "./globals.css";
 import { withBasePath } from "@/lib/base-path";
 import { SITE } from "@/lib/site";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const livvic = Livvic({
+  variable: "--font-livvic",
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -65,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${fraunces.variable} ${manrope.variable} antialiased`}>
+      <body className={`${livvic.variable} ${manrope.variable} antialiased`}>
         <a
           href="#conteudo"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-cream"

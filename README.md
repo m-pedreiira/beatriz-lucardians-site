@@ -34,8 +34,9 @@ components/
   Header.tsx           # navegação fixa + menu mobile
   Hero.tsx              # abertura, CTA, credenciais, indicador de scroll
   About.tsx              # seção "Sobre"
-  Timeline.tsx            # "Formação e trajetória"
-  Services.tsx              # "Atendimentos"
+  LifeStages.tsx            # "Atendimentos" por fase da vida
+  Procedures.tsx            # "Procedimentos e tratamentos"
+  Faq.tsx                   # "Perguntas frequentes"
   Gallery.tsx                 # galeria masonry (abre o Lightbox)
   Lightbox.tsx                 # visualizador de fotos (teclado + touch)
   CtaBand.tsx                    # card de convite ao contato
@@ -45,7 +46,7 @@ components/
   Eyebrow.tsx                        # rótulo pequeno reutilizável das seções
 lib/
   site.ts        # LATTES_URL, links de contato, itens de navegação
-  content.ts       # formação e atendimentos (dados factuais do currículo/bio)
+  content.ts       # formação, fases da vida, procedimentos e perguntas frequentes
   gallery.ts          # imagens da galeria (com dimensões reais)
   base-path.ts           # prefixa assets com o basePath do GitHub Pages
 public/
@@ -62,12 +63,14 @@ scripts/
 - **Next.js 16** (App Router, `output: "export"` para HTML/CSS/JS 100% estáticos)
 - **TypeScript**
 - **Tailwind CSS v4** (tokens de design via `@theme` em `app/globals.css`)
-- **next/font** (Fraunces + Manrope, self-hosted, sem chamadas externas em runtime)
+- **next/font** (Livvic + Manrope, self-hosted, sem chamadas externas em runtime)
 - Sem bibliotecas de animação ou de galeria/lightbox — o scroll-reveal (`Reveal.tsx`) e o lightbox (`Lightbox.tsx`) são componentes próprios, pequenos e sem dependências, para manter o site leve.
 
 ---
 
 ## Decisões de design
+
+> O visual atual segue o Figma `site-beatriz` (ver `docs/produto/decisoes.md`). O texto abaixo descreve a primeira versão.
 
 **Problema identificado antes de começar:** a logo real da Dra. Beatriz (um mascote de "dentinho" colorido, fonte manuscrita) é lúdica — pensada para redes sociais — enquanto o briefing pedia um site elegante e editorial. Alinhado com você durante o projeto, o site final:
 
