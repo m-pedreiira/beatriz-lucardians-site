@@ -43,7 +43,7 @@ export default function Faq() {
                       aria-expanded={open}
                       aria-controls={`resposta-${i}`}
                       onClick={(e) => toggle(i, e.currentTarget.closest("li")!)}
-                      className="group flex w-full cursor-pointer items-center gap-4 px-3 py-4 text-left transition-colors hover:bg-paper/70 focus-visible:!-outline-offset-2"
+                      className="group flex w-full cursor-pointer items-center gap-4 px-3 py-4 text-left transition-colors hover:bg-ink/4 focus-visible:!-outline-offset-2"
                     >
                       <span className={`h-2 w-2 shrink-0 rounded-full ${dotColors[item.dot]}`} aria-hidden="true" />
                       <span className="min-w-0 flex-1 font-display text-lg leading-snug text-ink transition-colors group-hover:text-accent md:text-xl">
