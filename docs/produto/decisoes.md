@@ -28,3 +28,6 @@
 | 2026-11-27 | Nas perguntas frequentes, várias respostas podem ficar abertas (substitui "uma por vez") e a tela nunca rola para cima sozinha. | Ao fechar a resposta anterior, a tela subia e descia de forma estranha. |
 | 2026-11-27 | A galeria volta a ser um carrossel (substitui a grade), com profundidade, arrasto, botão de pausar e tamanho ajustado à altura da tela. | Pedido do dono do projeto. |
 | 2026-11-27 | O carrossel deixa de pausar com o mouse em cima e as fotos ficam maiores. | A rotação parecia não funcionar, porque o carrossel ocupa quase toda a tela. |
+| 2026-11-28 | A galeria recebeu 17 fotos e 6 vídeos (29 itens no total), em public/galeria. Arquivos copiados sem recompressão; capas geradas a partir dos vídeos. | Pedido do dono do projeto. |
+| 2026-11-28 | Com mais de 10 itens, o carrossel mostra contador e barra de progresso no lugar dos pontos. | 29 pontos não cabem bem na tela. |
+| 2026-11-28 | A galeria ficou com um só dos dois retratos de blusa azul (28 itens). Site publicado em seguida; guardar as autorizações de uso de imagem das pessoas que aparecem. | Pedido do dono do projeto. |

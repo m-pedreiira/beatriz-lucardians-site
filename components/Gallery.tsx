@@ -11,6 +11,8 @@ import Reveal from "./Reveal";
 const AUTOPLAY_MS = 4500;
 const total = galleryItems.length;
 const several = total > 1;
+// Beyond this, one dot per item no longer fits: show a counter and a progress bar.
+const MAX_DOTS = 10;
 
 /** Signed distance from the centered item, wrapping around: …, -2, -1, 0, 1, 2, … */
 function offsetFrom(i: number, index: number) {
@@ -36,8 +38,9 @@ function frameStyle(offset: number): React.CSSProperties {
   };
 }
 
-function Slide({ item, active }: { item: GalleryItem; active: boolean }) {
-  const image = item.type === "foto" ? item.file : item.poster;
+function Slide({ item, active, near }: { item: GalleryItem; active: boolean; near: boolean }) {
+  // Only the frames on screen, or about to be, download their picture.
+  const image = near ? (item.type === "foto" ? item.file : item.poster) : undefined;
 
   return (
     <>
@@ -194,7 +197,7 @@ export default function Gallery() {
                       : "transition-[transform,opacity,box-shadow] duration-500 ease-out motion-reduce:transition-none"
                   } ${active ? "shadow-[0_18px_40px_-14px_rgb(42_35_30/0.35)]" : ""}`}
                 >
-                  <Slide item={item} active={active} />
+                  <Slide item={item} active={active} near={Math.abs(offset) <= 3} />
                 </button>
               );
             })}
@@ -206,22 +209,36 @@ export default function Gallery() {
               <ArrowButton direction="next" onClick={() => step(1)} />
 
               <div className="flex items-center justify-center gap-1">
-                {galleryItems.map((item, i) => (
-                  <button
-                    key={item.file}
-                    type="button"
-                    onClick={() => setIndex(i)}
-                    aria-label={`Ir para o item ${i + 1} de ${total}`}
-                    aria-current={i === index}
-                    className="group flex h-8 cursor-pointer items-center px-1"
-                  >
-                    <span
-                      className={`block h-2 rounded-full transition-all ${
-                        i === index ? "w-7 bg-accent" : "w-2 bg-ink/18 group-hover:bg-ink/40"
-                      }`}
-                    />
-                  </button>
-                ))}
+                {total <= MAX_DOTS ? (
+                  galleryItems.map((item, i) => (
+                    <button
+                      key={item.file}
+                      type="button"
+                      onClick={() => setIndex(i)}
+                      aria-label={`Ir para o item ${i + 1} de ${total}`}
+                      aria-current={i === index}
+                      className="group flex h-8 cursor-pointer items-center px-1"
+                    >
+                      <span
+                        className={`block h-2 rounded-full transition-all ${
+                          i === index ? "w-7 bg-accent" : "w-2 bg-ink/18 group-hover:bg-ink/40"
+                        }`}
+                      />
+                    </button>
+                  ))
+                ) : (
+                  <div className="flex items-center gap-3 font-sans text-sm text-ink-soft">
+                    <span className="h-1 w-36 overflow-hidden rounded-full bg-ink/12 md:w-56" aria-hidden="true">
+                      <span
+                        className="block h-full rounded-full bg-accent transition-[width] duration-500"
+                        style={{ width: `${((index + 1) / total) * 100}%` }}
+                      />
+                    </span>
+                    <span className="min-w-14 text-center tabular-nums">
+                      {index + 1} / {total}
+                    </span>
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={() => setPlaying((p) => !p)}
