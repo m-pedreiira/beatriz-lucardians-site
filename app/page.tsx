@@ -17,11 +17,14 @@ export default function Home() {
         <Hero />
         <About />
         <LifeStages />
-        <Procedures />
         <Gallery />
+        <Procedures />
         <Faq />
-        <CtaBand />
-        <Contact />
+        {/* "Contatos" in the menu lands on the call to action, followed by the channels. */}
+        <div id="contato">
+          <CtaBand />
+          <Contact />
+        </div>
       </main>
       <Footer />
     </>

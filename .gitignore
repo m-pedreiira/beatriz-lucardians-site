@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# fotos originais (podem conter dados de localização; só as versões geradas vão para o site)
+/assets/originais/

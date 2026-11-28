@@ -26,37 +26,61 @@ Gera o site estático em `out/`. `npm run lint` roda o ESLint.
 ```
 app/
   layout.tsx        # fontes, metadata (SEO/OG/ícones), <html lang="pt-BR">
-  page.tsx           # composição das seções da landing page
-  globals.css         # tokens de cor/tipografia (Tailwind v4 @theme)
-  robots.ts            # /robots.txt (gerado estaticamente)
-  sitemap.ts            # /sitemap.xml (gerado estaticamente)
+  page.tsx          # ordem das seções
+  globals.css       # cores, fontes e espaçamentos (Tailwind v4 @theme)
+  robots.ts, sitemap.ts
 components/
-  Header.tsx           # navegação fixa + menu mobile
-  Hero.tsx              # abertura, CTA, credenciais, indicador de scroll
-  About.tsx              # seção "Sobre"
-  LifeStages.tsx            # "Atendimentos" por fase da vida
-  Procedures.tsx            # "Procedimentos e tratamentos"
-  Faq.tsx                   # "Perguntas frequentes"
-  Gallery.tsx                 # galeria masonry (abre o Lightbox)
-  Lightbox.tsx                 # visualizador de fotos (teclado + touch)
-  CtaBand.tsx                    # card de convite ao contato
-  Contact.tsx                     # canais de contato
-  Footer.tsx                       # rodapé
-  Reveal.tsx                        # animação de entrada ao rolar a página
-  Eyebrow.tsx                        # rótulo pequeno reutilizável das seções
+  Header.tsx        # menu fixo + menu sanduíche
+  Hero.tsx          # abertura (a foto está em HeroPhoto.tsx)
+  About.tsx         # "Sobre" e formação
+  LifeStages.tsx    # "Atendimentos": linha do tempo das fases da vida
+  Gallery.tsx       # grade de fotos e vídeos
+  Lightbox.tsx      # visualização ampliada (teclado + toque)
+  Procedures.tsx    # cards de "Procedimentos e tratamentos"
+  Faq.tsx           # "Perguntas frequentes"
+  CtaBand.tsx       # convite ao contato
+  Contact.tsx       # canais de contato
+  Footer.tsx        # rodapé
+  Reveal.tsx, Eyebrow.tsx, SectionLabel.tsx, RichText.tsx
 lib/
-  site.ts        # LATTES_URL, links de contato, itens de navegação
-  content.ts       # formação, fases da vida, procedimentos e perguntas frequentes
-  gallery.ts          # imagens da galeria (com dimensões reais)
-  base-path.ts           # prefixa assets com o basePath do GitHub Pages
+  site.ts           # links de contato, mensagem do WhatsApp, itens do menu
+  content.ts        # formação, fases da vida, procedimentos e perguntas
+  gallery.ts        # lista de fotos e vídeos da galeria
+  hero-photo.json   # gerado por npm run foto-hero
+  keep-in-place.ts  # mantém o item aberto no lugar da tela
+  base-path.ts      # prefixa arquivos com o basePath do GitHub Pages
 public/
-  images/            # fotos reais, redimensionadas para web
-  logo/                # logo (fundo removido) + variações de ícone/favicon
+  design/, images/, logo/
 scripts/
-  process-images.mjs    # script usado uma vez para gerar public/images e public/logo
+  hero-photo.mjs       # gera os tamanhos da foto do hero
+  process-images.mjs   # usado uma vez para gerar public/images e public/logo
 .github/workflows/
-  deploy.yml               # publica out/ no GitHub Pages a cada push em main
+  deploy.yml        # publica no GitHub Pages a cada push em main
 ```
+
+## Como adicionar fotos e vídeos na galeria
+
+1. Copie o arquivo para `public/galeria/` (crie a pasta na primeira vez). Use nomes sem espaços nem acentos; maiúsculas e minúsculas fazem diferença no site publicado.
+2. Acrescente uma linha à lista `media` em `lib/gallery.ts`. A ordem da lista é a ordem no site.
+
+```ts
+{ type: "foto", file: "/galeria/consultorio.jpg", alt: "Descrição da foto" },
+{ type: "video", file: "/galeria/atendimento.mp4", poster: "/galeria/atendimento.jpg", alt: "Descrição do vídeo" },
+```
+
+- **Fotos:** JPG ou WebP, com cerca de 1600 px no lado maior. O site não reduz esses arquivos.
+- **Vídeos:** MP4 (H.264), de preferência curtos e abaixo de 20 MB. Sem a imagem de capa (`poster`), o quadro aparece vazio, só com o botão de tocar.
+- Se a miniatura cortar o rosto, ajuste com `position: "center top"`.
+- Fotos e vídeos de pacientes, principalmente crianças, precisam de autorização de uso de imagem.
+
+## Como trocar a foto do hero
+
+1. Salve o original como `assets/originais/hero.jpg` (ou `.png`), no lugar do atual. Essa pasta não vai para o GitHub.
+2. Rode `npm run foto-hero`.
+3. Confira o enquadramento; se precisar, ajuste `FRAMING` em `components/HeroPhoto.tsx`.
+4. Faça o commit de `public/images/hero/` e `lib/hero-photo.json`.
+
+Resolução mínima recomendada: **1600×2400** (vertical, 2:3), direto da câmera, sem passar por WhatsApp ou editores.
 
 ## Tecnologias
 
@@ -64,6 +88,7 @@ scripts/
 - **TypeScript**
 - **Tailwind CSS v4** (tokens de design via `@theme` em `app/globals.css`)
 - **next/font** (Livvic + Manrope, self-hosted, sem chamadas externas em runtime)
+- **Tabler Icons** (ícones dos procedimentos; só os usados entram no site)
 - Sem bibliotecas de animação ou de galeria/lightbox — o scroll-reveal (`Reveal.tsx`) e o lightbox (`Lightbox.tsx`) são componentes próprios, pequenos e sem dependências, para manter o site leve.
 
 ---

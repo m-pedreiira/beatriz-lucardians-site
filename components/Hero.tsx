@@ -2,6 +2,7 @@ import Image from "next/image";
 import { withBasePath } from "@/lib/base-path";
 import { CONTACT, SITE } from "@/lib/site";
 import Eyebrow from "./Eyebrow";
+import HeroPhoto from "./HeroPhoto";
 import Reveal from "./Reveal";
 
 const highlights = [
@@ -82,20 +83,13 @@ export default function Hero() {
 
         <div className="order-1 md:order-2">
           <Reveal delay={150}>
-            <div className="relative mx-auto max-w-md pr-4 pb-4 md:max-w-none md:pr-0 md:pb-0">
+            <div className="relative mx-auto max-w-[18rem] pr-4 pb-4 md:max-w-[min(420px,88%)] md:pr-0 md:pb-0">
               <div
-                className="absolute top-4 right-0 bottom-0 left-4 rounded-[2rem] bg-honey/85 md:top-6 md:-right-6 md:-bottom-6 md:left-6"
+                className="absolute top-4 right-0 bottom-0 left-4 rounded-[2rem] bg-honey/85 md:top-[1.125rem] md:-right-[1.125rem] md:-bottom-[1.125rem] md:left-[1.125rem]"
                 aria-hidden="true"
               />
-              <div className="relative aspect-[490/613] w-full overflow-hidden rounded-[2rem] bg-paper">
-                <Image
-                  src={withBasePath("/design/hero-portrait.jpg")}
-                  alt="Dra. Beatriz Lucárdians, cirurgiã-dentista, sorrindo de jaleco"
-                  width={1100}
-                  height={1650}
-                  priority
-                  className="absolute top-[-49%] left-[-5.7%] h-[180%] w-[150.09%] max-w-none"
-                />
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-paper">
+                <HeroPhoto />
               </div>
             </div>
           </Reveal>

@@ -8,11 +8,11 @@ import RichText from "./RichText";
 
 export default function About() {
   return (
-    <section id="sobre" className="bg-paper py-20 md:pb-24">
-      <div className="mx-auto max-w-[1335px] px-6">
-        <div className="grid gap-12 lg:grid-cols-[538fr_714fr] lg:gap-9">
-          <Reveal className="order-2 lg:order-1 lg:pt-16">
-            <div className="relative mx-auto aspect-[538/755] w-full max-w-[538px]">
+    <section id="sobre" className="bg-paper py-section">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <div className="grid items-center gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-10 lg:gap-14">
+          <Reveal className="order-2 md:order-1">
+            <div className="relative mx-auto aspect-[538/755] w-full max-w-[17rem] md:max-w-[23rem]">
               <div
                 className="absolute top-0 left-0 h-[98.7%] w-[92.75%] rounded-[2rem] bg-sage"
                 aria-hidden="true"
@@ -29,15 +29,13 @@ export default function About() {
             </div>
           </Reveal>
 
-          <div className="order-1 lg:order-2">
+          <div className="order-1 md:order-2">
             <Reveal>
-              <Eyebrow className="!mb-0 text-base font-bold !tracking-[0.18em] text-coral">Sobre</Eyebrow>
-              <h2 className="pt-4 font-display text-4xl leading-tight font-medium text-ink-soft md:text-[3.1rem]">
-                Muito prazer, Beatriz.
-              </h2>
+              <Eyebrow className="!mb-0 text-sm font-bold !tracking-[0.18em] text-coral">Sobre</Eyebrow>
+              <h2 className="pt-2 font-display text-title font-medium text-ink-soft">Muito prazer, Beatriz.</h2>
             </Reveal>
             <Reveal delay={120}>
-              <div className="flex flex-col gap-[1.9rem] pt-5 font-sans text-lg leading-[1.625] text-ink-soft xl:text-[1.16rem]">
+              <div className="flex flex-col gap-3.5 pt-4 font-sans text-base leading-relaxed text-ink-soft lg:text-[1.0625rem]">
                 <p>
                   Sou cirurgiã-dentista, formada pela Universidade Federal de Minas Gerais (UFMG), e encontrei
                   na odontologia uma forma de unir conhecimento, cuidado e, principalmente, conexão com as
@@ -48,7 +46,7 @@ export default function About() {
                   contato próximo com os pacientes que descobri o que realmente quero levar para a minha
                   prática: uma odontologia mais humana, respeitosa, leve e individualizada.
                 </p>
-                <p className="lg:mt-5">
+                <p>
                   Tenho um carinho especial pelo atendimento infantil e por acompanhar as crianças desde os
                   primeiros contatos com o dentista, ajudando a construir uma relação positiva com a saúde
                   bucal. Ao mesmo tempo, acredito que o cuidado deve acompanhar o paciente em todas as fases
@@ -65,19 +63,23 @@ export default function About() {
           </div>
         </div>
 
-        <Reveal className="pt-12">
-          <ul id="formacao" aria-label="Formação" className="flex flex-col gap-5">
+        <Reveal className="pt-block">
+          <ul
+            id="formacao"
+            aria-label="Formação"
+            className="grid gap-x-10 gap-y-4 border-t border-line pt-block lg:grid-cols-2"
+          >
             {credentials.map((item) => (
-              <li key={item.icon} className="flex items-center gap-[1.2rem]">
-                <Image src={withBasePath(item.icon)} alt="" width={47} height={47} className="shrink-0" />
-                <p className="max-w-[1040px] font-sans text-base leading-[1.5] text-ink-soft md:text-lg">
+              <li key={item.icon} className="flex items-center gap-4">
+                <Image src={withBasePath(item.icon)} alt="" width={40} height={40} className="shrink-0" />
+                <p className="min-w-0 font-sans text-base leading-normal text-ink-soft">
                   <RichText text={item.text} />
                   {item.lattes && LATTES_URL && (
                     <a
                       href={LATTES_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="ml-4 inline-flex items-start gap-1 whitespace-nowrap text-blue hover:underline"
+                      className="ml-3 inline-flex items-start gap-1 whitespace-nowrap text-blue hover:underline"
                     >
                       Lattes
                       <Image src={withBasePath("/design/link-arrow.svg")} alt="" width={11.5} height={11.5} />

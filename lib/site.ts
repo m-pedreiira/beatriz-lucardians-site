@@ -25,8 +25,9 @@ export const CONTACT = {
 
 export const NAV_LINKS = [
   { href: "#sobre", label: "Sobre" },
-  { href: "#formacao", label: "Formação" },
   { href: "#atendimentos", label: "Atendimentos" },
   { href: "#galeria", label: "Galeria" },
-  { href: "#contato", label: "Contato" },
+  { href: "#procedimentos", label: "Procedimentos" },
+  { href: "#perguntas", label: "Perguntas frequentes" },
+  { href: "#contato", label: "Contatos" },
 ];

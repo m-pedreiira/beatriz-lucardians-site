@@ -1,52 +1,97 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
-import type { GalleryImage } from "@/lib/gallery";
+import { createPortal } from "react-dom";
+import type { GalleryItem } from "@/lib/gallery";
 
 type LightboxProps = {
-  images: GalleryImage[];
+  items: GalleryItem[];
   index: number;
   onClose: () => void;
   onIndexChange: (index: number) => void;
 };
 
-export default function Lightbox({ images, index, onClose, onIndexChange }: LightboxProps) {
-  const touchStartX = useRef<number | null>(null);
+function Arrow({ direction }: { direction: "prev" | "next" }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d={direction === "prev" ? "M15 5L8 12L15 19" : "M9 5L16 12L9 19"}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const roundButton =
+  "flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 text-cream transition-colors hover:bg-cream/20 focus-visible:!outline-cream";
+
+export default function Lightbox({ items, index, onClose, onIndexChange }: LightboxProps) {
+  const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const touchStartX = useRef<number | null>(null);
 
-  const goPrev = () => onIndexChange((index - 1 + images.length) % images.length);
-  const goNext = () => onIndexChange((index + 1) % images.length);
+  const goPrev = () => onIndexChange((index - 1 + items.length) % items.length);
+  const goNext = () => onIndexChange((index + 1) % items.length);
 
+  // Lock the page behind the dialog and give focus back to the thumbnail on close.
   useEffect(() => {
+    const opener = document.activeElement as HTMLElement | null;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
     return () => {
       document.body.style.overflow = "";
+      opener?.focus({ preventScroll: true });
     };
   }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "ArrowRight") goNext();
+
+      // Inside the video player the arrows seek, so they don't change the item.
+      const inVideo = e.target instanceof HTMLVideoElement;
+      if (e.key === "ArrowLeft" && !inVideo) goPrev();
+      if (e.key === "ArrowRight" && !inVideo) goNext();
+
+      // Keep Tab inside the dialog.
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusable = [...dialogRef.current.querySelectorAll<HTMLElement>("button, video")].filter(
+          (el) => el.offsetParent !== null
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const outside = !dialogRef.current.contains(document.activeElement);
+        if (e.shiftKey && (document.activeElement === first || outside)) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && (document.activeElement === last || outside)) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index]);
+  });
 
-  const image = images[index];
+  const item = items[index];
+  const several = items.length > 1;
 
-  return (
+  // Rendered on <body> so no transformed ancestor can trap the fixed overlay.
+  return createPortal(
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
-      aria-label="Visualização ampliada da foto"
-      className="fixed inset-0 z-[100] flex flex-col bg-ink/97 backdrop-blur-sm"
+      aria-label="Galeria ampliada"
+      // Any click that isn't on the media or a button closes the dialog.
+      onClick={onClose}
+      className="fixed inset-0 z-[100] flex flex-col bg-ink/95 backdrop-blur-sm"
       onTouchStart={(e) => {
-        touchStartX.current = e.touches[0].clientX;
+        touchStartX.current = e.target instanceof HTMLVideoElement ? null : e.touches[0].clientX;
       }}
       onTouchEnd={(e) => {
         if (touchStartX.current === null) return;
@@ -56,93 +101,69 @@ export default function Lightbox({ images, index, onClose, onIndexChange }: Ligh
         touchStartX.current = null;
       }}
     >
-      <div className="flex items-center justify-between px-5 py-4 md:px-8 md:py-6">
-        <span className="font-sans text-sm text-cream/70">
-          {index + 1} / {images.length}
+      <div className="flex items-center justify-between px-5 py-4 md:px-8">
+        <span className="font-sans text-sm text-cream/80" aria-live="polite">
+          {index + 1} / {items.length}
         </span>
-        <button
-          ref={closeButtonRef}
-          type="button"
-          onClick={onClose}
-          aria-label="Fechar"
-          className="flex h-10 w-10 items-center justify-center rounded-full text-cream/90 transition-colors hover:bg-cream/10"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar" className={roundButton}>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M1 1L19 19M19 1L1 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>
       </div>
 
-      <div
-        className="relative flex flex-1 items-center justify-center px-4 pb-6 md:px-16"
-        onClick={onClose}
-      >
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            goPrev();
-          }}
-          aria-label="Foto anterior"
-          className="absolute left-2 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-cream/90 transition-colors hover:bg-cream/10 sm:flex md:left-6"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M15 5L8 12L15 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-
-        <div
-          className="relative max-h-[78vh] max-w-full"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Image
-            key={image.src}
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            className="max-h-[78vh] w-auto rounded-lg object-contain"
-            priority
+      <div className="flex min-h-0 flex-1 items-center justify-center px-4 pb-4 md:px-20">
+        {item.type === "video" ? (
+          <video
+            key={item.file}
+            src={item.file}
+            poster={item.poster}
+            controls
+            playsInline
+            preload="metadata"
+            aria-label={item.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-full max-w-full rounded-lg"
           />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element -- natural size, whatever file is added
+          <img
+            key={item.file}
+            src={item.file}
+            alt={item.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-full max-w-full rounded-lg object-contain"
+          />
+        )}
+      </div>
+
+      {several && (
+        <div className="flex justify-center gap-4 pb-5">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goPrev();
+            }}
+            aria-label="Item anterior"
+            className={roundButton}
+          >
+            <Arrow direction="prev" />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goNext();
+            }}
+            aria-label="Próximo item"
+            className={roundButton}
+          >
+            <Arrow direction="next" />
+          </button>
         </div>
-
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            goNext();
-          }}
-          aria-label="Próxima foto"
-          className="absolute right-2 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-cream/90 transition-colors hover:bg-cream/10 sm:flex md:right-6"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      </div>
-
-      <div className="flex justify-center gap-4 pb-6 sm:hidden">
-        <button
-          type="button"
-          onClick={goPrev}
-          aria-label="Foto anterior"
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 text-cream"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M15 5L8 12L15 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-        <button
-          type="button"
-          onClick={goNext}
-          aria-label="Próxima foto"
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 text-cream"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      </div>
-    </div>
+      )}
+    </div>,
+    document.body
   );
 }

@@ -27,7 +27,7 @@ const channels = [
 
 export default function Contact() {
   return (
-    <section id="contato" className="bg-cream px-6 pt-16 pb-24 md:px-10 md:pb-32">
+    <section id="canais" className="bg-cream px-6 pt-block pb-section md:px-10">
       <h2 className="sr-only">Contato</h2>
       <Reveal className="mx-auto max-w-[1072px]">
         <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
@@ -37,7 +37,7 @@ export default function Contact() {
               href={channel.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex min-w-0 flex-col justify-between gap-8 px-7 py-9 text-ink transition-[filter] hover:brightness-95 ${channel.color}`}
+              className={`flex min-w-0 flex-col justify-between gap-4 px-6 py-6 text-ink transition-[filter] hover:brightness-95 ${channel.color}`}
             >
               <div>
                 <h3 className="font-display text-2xl leading-8">{channel.label}</h3>

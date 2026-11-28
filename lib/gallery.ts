@@ -1,53 +1,70 @@
 import { withBasePath } from "./base-path";
 
-export type GalleryImage = {
-  src: string;
-  width: number;
-  height: number;
+/*
+ * GALERIA — para adicionar uma foto ou um vídeo:
+ *
+ * 1. Copie o arquivo para a pasta public/galeria/ (nome sem espaços nem acentos).
+ * 2. Acrescente um item à lista `media`, abaixo. A ordem da lista é a ordem no site.
+ *
+ *    Foto:
+ *      { type: "foto", file: "/galeria/consultorio.jpg", alt: "Descrição da foto" },
+ *
+ *    Vídeo (MP4; a capa é uma imagem mostrada antes de tocar):
+ *      { type: "video", file: "/galeria/atendimento.mp4", poster: "/galeria/atendimento.jpg",
+ *        alt: "Descrição do vídeo" },
+ *
+ * `position` (opcional) ajusta o enquadramento da miniatura, ex.: "center top".
+ * Mais detalhes no README.
+ */
+
+type BaseItem = {
+  /** Path inside public/, starting with "/". */
+  file: string;
+  /** Description read by screen readers. */
   alt: string;
-  /** Zoom/offset applied inside the carousel frame (the lightbox shows the full photo). */
-  crop?: { width: string; height: string; left: string; top: string };
+  position?: string;
 };
 
-export const galleryImages: GalleryImage[] = [
+export type GalleryItem =
+  | (BaseItem & { type: "foto" })
+  | (BaseItem & { type: "video"; poster?: string });
+
+const media: GalleryItem[] = [
   {
-    src: withBasePath("/design/gallery-1.jpg"),
-    width: 900,
-    height: 1600,
+    type: "foto",
+    file: "/design/gallery-1.jpg",
     alt: "Dra. Beatriz Lucárdians brincando com uma criança no consultório",
   },
   {
-    src: withBasePath("/images/clinical.jpg"),
-    width: 541,
-    height: 756,
+    type: "foto",
+    file: "/images/clinical.jpg",
     alt: "Dra. Beatriz Lucárdians ensinando higiene bucal com um boneco",
   },
   {
-    src: withBasePath("/design/gallery-3.jpg"),
-    width: 1200,
-    height: 1600,
+    type: "foto",
+    file: "/design/gallery-3.jpg",
     alt: "Dra. Beatriz Lucárdians atendendo uma criança na cadeira odontológica",
-    crop: { width: "145.87%", height: "145.87%", left: "-37.19%", top: "-11.18%" },
   },
   {
-    src: withBasePath("/images/candid.jpg"),
-    width: 720,
-    height: 1280,
+    type: "foto",
+    file: "/images/candid.jpg",
     alt: "Dra. Beatriz Lucárdians em seu consultório odontológico",
+    position: "center 30%",
   },
   {
-    src: withBasePath("/images/portrait-pattern-tight.jpg"),
-    width: 1024,
-    height: 1280,
+    type: "foto",
+    file: "/images/portrait-pattern-tight.jpg",
     alt: "Retrato próximo da Dra. Beatriz Lucárdians",
   },
   {
-    src: withBasePath("/images/portrait-pattern.jpg"),
-    width: 1024,
-    height: 1280,
+    type: "foto",
+    file: "/images/portrait-pattern.jpg",
     alt: "Retrato da Dra. Beatriz Lucárdians",
   },
 ];
 
-/** Photo shown in the center when the page loads. */
-export const GALLERY_START = 1;
+export const galleryItems: GalleryItem[] = media.map((item) => ({
+  ...item,
+  file: withBasePath(item.file),
+  ...(item.type === "video" && item.poster ? { poster: withBasePath(item.poster) } : {}),
+}));

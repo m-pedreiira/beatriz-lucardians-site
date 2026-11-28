@@ -1,3 +1,21 @@
+import {
+  IconBabyCarriage,
+  IconClipboardList,
+  IconDental,
+  IconDentalBroken,
+  IconDentalOff,
+  IconFirstAidKit,
+  IconFocus2,
+  IconPuzzle,
+  IconShield,
+  IconSnowflake,
+  IconSparkles,
+  IconStethoscope,
+  IconSun,
+  IconZzz,
+  type Icon,
+} from "@tabler/icons-react";
+
 // Site copy, transcribed from the Figma file "site-beatriz".
 // Wrap a passage in **double asterisks** to render it in bold (see RichText).
 
@@ -29,150 +47,153 @@ export const credentials: Credential[] = [
 
 export type LifeStage = {
   title: string;
-  /** Side of the title and the illustration on wide screens. */
-  side: "left" | "right";
   subtitle?: string;
   text: string;
-  textAlign?: "left";
   image: { src: string; width: number; height: number; alt: string };
 };
 
 export const lifeStages: LifeStage[] = [
   {
     title: "Gestação",
-    side: "right",
     text: "Pré-natal odontológico, orientações para a gestante e preparação para os primeiros cuidados com a saúde bucal do bebê.",
     image: { src: "/design/phase-pregnancy.webp", width: 1024, height: 687, alt: "Ilustração de uma gestante" },
   },
   {
     title: "Orientações para a família",
-    side: "left",
     text: "Orientações individualizadas para pais e responsáveis sobre higiene bucal, alimentação, nascimento dos dentes e hábitos que influenciam a saúde bucal em cada fase da infância, ajudando a tornar o cuidado parte da rotina da família.",
     image: { src: "/design/phase-family.webp", width: 773, height: 519, alt: "Ilustração de um casal com o bebê no colo" },
   },
   {
     title: "Bebês",
-    side: "right",
-    textAlign: "left",
     text: "O acompanhamento desde os primeiros meses é importante para orientar a família, acompanhar o desenvolvimento oral e estabelecer hábitos saudáveis desde cedo. Um olhar individualizado para cada bebê, incluindo cuidados específicos para bebês com Trissomia 21, como a Placa Palatina de Memória (PPM), quando indicada.",
     image: { src: "/design/phase-babies.webp", width: 773, height: 578, alt: "Ilustração de um bebê sorrindo" },
   },
   {
     title: "Infância",
-    side: "left",
     subtitle: "Crescer com saúde e confiança",
     text: "A infância é uma fase de descobertas e desenvolvimento, em que os cuidados com a saúde bucal ajudam a construir hábitos que podem acompanhar a criança por toda a vida. O acompanhamento é voltado à prevenção, à atenção às mudanças da dentição e às necessidades de cada fase, sempre com acolhimento, respeito ao tempo da criança e participação da família.",
     image: { src: "/design/phase-childhood.webp", width: 706, height: 706, alt: "Ilustração de uma criança sorrindo" },
   },
   {
     title: "Adolescentes",
-    side: "right",
     text: "Uma fase de mudanças, descobertas e novos hábitos. O acompanhamento odontológico ajuda a cuidar da saúde bucal durante o desenvolvimento, incentivando a autonomia nos cuidados diários e respeitando as necessidades de cada adolescente.",
     image: { src: "/design/phase-teens.webp", width: 739, height: 496, alt: "Ilustração de uma adolescente sorrindo" },
   },
   {
     title: "Vida adulta",
-    side: "left",
     text: "Escuta atenta para compreender o que é importante para cada paciente, unindo saúde, estética e bem-estar em um cuidado individualizado. Afinal, cuidar do sorriso também é cuidar da autoestima, da confiança e da qualidade de vida.",
     image: { src: "/design/phase-adults.webp", width: 773, height: 519, alt: "Ilustração de uma mulher adulta sorrindo" },
   },
   {
     title: "Envelhecimento",
-    side: "right",
     text: "Atenção às mudanças da saúde bucal, manutenção dos dentes, avaliação de próteses e cuidados individualizados para preservar o conforto, a função e a qualidade de vida.",
     image: { src: "/design/phase-elderly.webp", width: 773, height: 516, alt: "Ilustração de uma senhora sorrindo" },
   },
 ];
 
+export type Dot = "blush" | "sage" | "gold" | "sky";
+
 export type Procedure = {
   title: string;
   description: string;
-  dot: "blush" | "sage" | "gold" | "sky";
+  /** Soft color behind the icon. */
+  dot: Dot;
+  /** Thin line icon from @tabler/icons-react. */
+  icon: Icon;
 };
 
-/** Two columns, in the order shown in the design. */
-export const procedureColumns: Procedure[][] = [
-  [
-    {
-      title: "Primeira consulta",
-      description: "Acolhimento, escuta e avaliação inicial para conhecer sua história e suas necessidades.",
-      dot: "blush",
-    },
-    {
-      title: "Avaliação e plano de tratamento",
-      description: "Diagnóstico cuidadoso e um plano claro, construído junto com você.",
-      dot: "sage",
-    },
-    {
-      title: "Limpeza",
-      description: "Profilaxia e orientação de higiene bucal para toda a família.",
-      dot: "gold",
-    },
-    {
-      title: "Urgências odontopediátricas",
-      description: "Traumatismos dentários, dor de dente, abscessos, infecções, estomatites, mão-pé-boca, entre outras urgências.",
-      dot: "sky",
-    },
-    {
-      title: "Extração de dentes",
-      description: "Exodontias realizadas com técnica e cuidado com o conforto e segurança do paciente.",
-      dot: "sky",
-    },
-    {
-      title: "Canal em dente de leite",
-      description: "Tratamento endodôntico em dentes decíduos, com técnicas atualizadas e seguras.",
-      dot: "sky",
-    },
-    {
-      title: "Atendimentos sob sedação",
-      description: "Parceria com equipe médica anestesista para sedações medicamentosas e também com profissionais capacitados para sedação consciente com óxido nitroso.",
-      dot: "sky",
-    },
-  ],
-  [
-    {
-      title: "Clareamento dental",
-      description: "Procedimentos de clareamento com ciência, segurança e conforto.",
-      dot: "sky",
-    },
-    {
-      title: "Restaurações",
-      description: "Restaurações diretas e indiretas, devolvendo função e estética.",
-      dot: "sky",
-    },
-    {
-      title: "Próteses",
-      description: "Reabilitações protéticas pensadas para cada caso: coroa, peça, roach, dentaduras e outras soluções.",
-      dot: "sky",
-    },
-    {
-      title: "Laserterapia",
-      description: "Aplicação de laser de baixa potência como suporte terapêutico.",
-      dot: "sky",
-    },
-    {
-      title: "Placa de bruxismo",
-      description: "Placa de bruxismo individualizada, sob medida e ajustada como parte do tratamento do bruxismo.",
-      dot: "blush",
-    },
-    {
-      title: "Tratamento para sensibilidade dentinária",
-      description: "Avaliação e controle da causa, controle da sensibilidade e aplicação de agentes dessensibilizantes.",
-      dot: "blush",
-    },
-    {
-      title: "Placa palatina de memória para bebês com T21",
-      description: "Dispositivo intraoral para bebês com Trissomia 21, utilizado como parte da estimulação orofacial, auxiliando na postura da língua e no selamento labial.",
-      dot: "blush",
-    },
-  ],
+export const procedures: Procedure[] = [
+  {
+    title: "Primeira consulta",
+    description: "Acolhimento, escuta e avaliação inicial para conhecer sua história e suas necessidades.",
+    dot: "blush",
+    icon: IconStethoscope,
+  },
+  {
+    title: "Avaliação e plano de tratamento",
+    description: "Diagnóstico cuidadoso e um plano claro, construído junto com você.",
+    dot: "sage",
+    icon: IconClipboardList,
+  },
+  {
+    title: "Limpeza",
+    description: "Profilaxia e orientação de higiene bucal para toda a família.",
+    dot: "gold",
+    icon: IconSparkles,
+  },
+  {
+    title: "Urgências odontopediátricas",
+    description: "Traumatismos dentários, dor de dente, abscessos, infecções, estomatites, mão-pé-boca, entre outras urgências.",
+    dot: "sky",
+    icon: IconFirstAidKit,
+  },
+  {
+    title: "Extração de dentes",
+    description: "Exodontias realizadas com técnica e cuidado com o conforto e segurança do paciente.",
+    dot: "sky",
+    icon: IconDentalOff,
+  },
+  {
+    title: "Canal em dente de leite",
+    description: "Tratamento endodôntico em dentes decíduos, com técnicas atualizadas e seguras.",
+    dot: "sky",
+    icon: IconDental,
+  },
+  {
+    title: "Atendimentos sob sedação",
+    description: "Parceria com equipe médica anestesista para sedações medicamentosas e também com profissionais capacitados para sedação consciente com óxido nitroso.",
+    dot: "sky",
+    icon: IconZzz,
+  },
+  {
+    title: "Clareamento dental",
+    description: "Procedimentos de clareamento com ciência, segurança e conforto.",
+    dot: "sky",
+    icon: IconSun,
+  },
+  {
+    title: "Restaurações",
+    description: "Restaurações diretas e indiretas, devolvendo função e estética.",
+    dot: "sky",
+    icon: IconDentalBroken,
+  },
+  {
+    title: "Próteses",
+    description: "Reabilitações protéticas pensadas para cada caso: coroa, peça, roach, dentaduras e outras soluções.",
+    dot: "sky",
+    icon: IconPuzzle,
+  },
+  {
+    title: "Laserterapia",
+    description: "Aplicação de laser de baixa potência como suporte terapêutico.",
+    dot: "sky",
+    icon: IconFocus2,
+  },
+  {
+    title: "Placa de bruxismo",
+    description: "Placa de bruxismo individualizada, sob medida e ajustada como parte do tratamento do bruxismo.",
+    dot: "blush",
+    icon: IconShield,
+  },
+  {
+    title: "Tratamento para sensibilidade dentinária",
+    description: "Avaliação e controle da causa, controle da sensibilidade e aplicação de agentes dessensibilizantes.",
+    dot: "blush",
+    icon: IconSnowflake,
+  },
+  {
+    title: "Placa palatina de memória para bebês com T21",
+    description: "Dispositivo intraoral para bebês com Trissomia 21, utilizado como parte da estimulação orofacial, auxiliando na postura da língua e no selamento labial.",
+    dot: "blush",
+    icon: IconBabyCarriage,
+  },
 ];
 
 export type FaqItem = {
   question: string;
   /** Each block is a group of lines; blocks are separated by a blank line. */
   answer: string[][];
-  dot: Procedure["dot"];
+  dot: Dot;
 };
 
 export const faq: FaqItem[] = [

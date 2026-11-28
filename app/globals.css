@@ -42,15 +42,43 @@
   }
 }
 
+/* Layout tokens: adjust the page rhythm here. */
+@theme {
+  /* Space above and below each section (py-section, pt-section, pb-section). */
+  --spacing-section: clamp(2.5rem, 4.5vw, 4rem);
+  /* Space between a section heading and its content (mt-block, pt-block). */
+  --spacing-block: clamp(1.25rem, 2.5vw, 2rem);
+  /* Section titles (text-title). */
+  --text-title: clamp(1.875rem, 3.2vw, 2.75rem);
+  --text-title--line-height: 1.15;
+}
+
+:root {
+  /* Height of the fixed header; anchored sections stop right below it. */
+  --header-height: 4.25rem;
+}
+
+@media (min-width: 80rem) {
+  :root {
+    --header-height: 4.5rem;
+  }
+}
+
 html {
   scroll-behavior: smooth;
-  /* Keeps anchored sections clear of the fixed header. */
-  scroll-padding-top: 5rem;
+  scroll-padding-top: var(--header-height);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }
 

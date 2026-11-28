@@ -13,7 +13,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-blue text-cream/70">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-10 px-7 pt-12 pb-10 lg:flex-row lg:items-start lg:justify-between lg:pr-[72px]">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-7 py-8 lg:flex-row lg:items-start lg:justify-between lg:pr-[72px]">
         <div className="flex items-start gap-6 xl:gap-10">
           <Image
             src={withBasePath("/logo/logo-badge.png")}
@@ -37,7 +37,7 @@ export default function Footer() {
           ))}
         </nav>
 
-        <div className="flex flex-col gap-3.5 font-sans text-base">
+        <div className="flex flex-col gap-2 font-sans text-base">
           {socials.map((social) => (
             <a
               key={social.label}

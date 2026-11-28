@@ -7,8 +7,8 @@ export default function SectionLabel({
   as?: "p" | "h2";
 }) {
   return (
-    <Tag className="flex items-center justify-center gap-3 font-sans text-base leading-9 font-semibold tracking-[0.2em] text-ink-soft uppercase md:gap-[1.35rem] md:text-[1.575rem]">
-      <span className="h-[1.8px] w-8 shrink-0 bg-ink-soft md:w-[3.6rem]" aria-hidden="true" />
+    <Tag className="flex items-center justify-center gap-3 font-sans text-sm leading-7 font-semibold tracking-[0.2em] text-ink-soft uppercase md:gap-4 md:text-lg">
+      <span className="h-[1.8px] w-8 shrink-0 bg-ink-soft md:w-12" aria-hidden="true" />
       {children}
     </Tag>
   );
