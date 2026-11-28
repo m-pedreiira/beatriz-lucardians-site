@@ -31,3 +31,4 @@
 | 2026-11-28 | A galeria recebeu 17 fotos e 6 vídeos (29 itens no total), em public/galeria. Arquivos copiados sem recompressão; capas geradas a partir dos vídeos. | Pedido do dono do projeto. |
 | 2026-11-28 | Com mais de 10 itens, o carrossel mostra contador e barra de progresso no lugar dos pontos. | 29 pontos não cabem bem na tela. |
 | 2026-11-28 | A galeria ficou com um só dos dois retratos de blusa azul (28 itens). Site publicado em seguida; guardar as autorizações de uso de imagem das pessoas que aparecem. | Pedido do dono do projeto. |
+| 2026-11-28 | Cada foto do carrossel fica 4 segundos na tela (antes: 4,5). | Pedido do dono do projeto. |

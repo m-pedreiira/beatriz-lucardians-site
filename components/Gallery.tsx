@@ -8,7 +8,7 @@ import Eyebrow from "./Eyebrow";
 import Lightbox from "./Lightbox";
 import Reveal from "./Reveal";
 
-const AUTOPLAY_MS = 4500;
+const AUTOPLAY_MS = 4000;
 const total = galleryItems.length;
 const several = total > 1;
 // Beyond this, one dot per item no longer fits: show a counter and a progress bar.
