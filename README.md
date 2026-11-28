@@ -34,7 +34,7 @@ components/
   Hero.tsx          # abertura (a foto está em HeroPhoto.tsx)
   About.tsx         # "Sobre" e formação
   LifeStages.tsx    # "Atendimentos": linha do tempo das fases da vida
-  Gallery.tsx       # grade de fotos e vídeos
+  Gallery.tsx       # carrossel de fotos e vídeos
   Lightbox.tsx      # visualização ampliada (teclado + toque)
   Procedures.tsx    # cards de "Procedimentos e tratamentos"
   Faq.tsx           # "Perguntas frequentes"
@@ -53,6 +53,7 @@ public/
   design/, images/, logo/
 scripts/
   hero-photo.mjs       # gera os tamanhos da foto do hero
+  stage-thumbs.mjs     # recorta as miniaturas da linha do tempo
   process-images.mjs   # usado uma vez para gerar public/images e public/logo
 .github/workflows/
   deploy.yml        # publica no GitHub Pages a cada push em main

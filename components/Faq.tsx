@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { faq, type Dot } from "@/lib/content";
-import { keepInPlace } from "@/lib/keep-in-place";
 import Reveal from "./Reveal";
 import RichText from "./RichText";
 import SectionLabel from "./SectionLabel";
@@ -14,13 +13,27 @@ const dotColors: Record<Dot, string> = {
   sky: "bg-sky",
 };
 
-export default function Faq() {
-  // One answer at a time, opened and closed by click, tap, Enter or Space.
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+// If an opened answer runs past the bottom of the screen, scrolls down just enough to
+// show it, never pushing its question under the header. The page never scrolls back up.
+function revealAnswer(item: HTMLElement) {
+  const { top, bottom } = item.getBoundingClientRect();
+  const header = document.querySelector("header > div")?.clientHeight ?? 0;
+  const distance = Math.min(bottom - window.innerHeight + 16, top - header - 8);
+  if (distance <= 0) return;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollBy({ top: distance, behavior: reduced ? "instant" : "smooth" });
+}
 
-  const toggle = (index: number, item: HTMLElement) => {
-    keepInPlace(item);
-    setOpenIndex(openIndex === index ? null : index);
+export default function Faq() {
+  // Answers stay open until clicked again, so opening one never moves the questions above.
+  const [openItems, setOpenItems] = useState<ReadonlySet<number>>(new Set());
+
+  const toggle = (index: number) => {
+    setOpenItems((current) => {
+      const next = new Set(current);
+      if (!next.delete(index)) next.add(index);
+      return next;
+    });
   };
 
   return (
@@ -33,7 +46,7 @@ export default function Faq() {
         <Reveal delay={120} className="pt-block">
           <ul className="flex flex-col">
             {faq.map((item, i) => {
-              const open = openIndex === i;
+              const open = openItems.has(i);
               return (
                 <li key={item.question} className="border-t border-ink/10 last:border-b">
                   <h3>
@@ -42,7 +55,7 @@ export default function Faq() {
                       id={`pergunta-${i}`}
                       aria-expanded={open}
                       aria-controls={`resposta-${i}`}
-                      onClick={(e) => toggle(i, e.currentTarget.closest("li")!)}
+                      onClick={() => toggle(i)}
                       className="group flex w-full cursor-pointer items-center gap-4 px-3 py-4 text-left transition-colors hover:bg-ink/4 focus-visible:!-outline-offset-2"
                     >
                       <span className={`h-2 w-2 shrink-0 rounded-full ${dotColors[item.dot]}`} aria-hidden="true" />
@@ -65,6 +78,10 @@ export default function Faq() {
                     id={`resposta-${i}`}
                     role="region"
                     aria-labelledby={`pergunta-${i}`}
+                    onTransitionEnd={(e) => {
+                      const grew = e.target === e.currentTarget && e.propertyName === "grid-template-rows";
+                      if (open && grew) revealAnswer(e.currentTarget.closest("li")!);
+                    }}
                     className={`grid transition-[grid-template-rows,opacity,visibility] duration-300 ease-out ${
                       open ? "visible grid-rows-[1fr] opacity-100" : "invisible grid-rows-[0fr] opacity-0"
                     }`}

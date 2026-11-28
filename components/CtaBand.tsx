@@ -7,7 +7,7 @@ export default function CtaBand() {
   return (
     <section className="bg-cream px-6 pt-section md:px-10">
       <Reveal className="relative mx-auto max-w-[1024px]">
-        <div className="flex flex-col items-center rounded-[2rem] bg-sage px-6 py-8 text-center sm:px-16">
+        <div className="flex flex-col items-center rounded-[2rem] bg-sage px-6 py-8 text-center sm:px-16 [@media(max-height:700px)]:py-5">
           <p className="flex items-center gap-4 font-sans text-sm leading-7 tracking-[0.2em] text-ink-soft uppercase md:gap-4 md:text-lg">
             <span className="h-0.5 w-8 shrink-0 bg-ink-soft md:w-12" aria-hidden="true" />
             Vamos conversar
@@ -19,7 +19,7 @@ export default function CtaBand() {
             Fale comigo para saber sobre disponibilidade, valores e como funciona a sua primeira consulta.
             Escolha o canal que for mais conveniente para você.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-5 [@media(max-height:700px)]:pt-3">
             <a
               href={CONTACT.whatsapp}
               target="_blank"

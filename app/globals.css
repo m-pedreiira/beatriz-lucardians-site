@@ -45,17 +45,19 @@
 /* Layout tokens: adjust the page rhythm here. */
 @theme {
   /* Space above and below each section (py-section, pt-section, pb-section). */
-  --spacing-section: clamp(2.5rem, 4.5vw, 4rem);
+  --spacing-section: clamp(2.25rem, 5.5svh, 3.5rem);
   /* Space between a section heading and its content (mt-block, pt-block). */
-  --spacing-block: clamp(1.25rem, 2.5vw, 2rem);
+  --spacing-block: clamp(1rem, 3svh, 2rem);
   /* Section titles (text-title). */
-  --text-title: clamp(1.875rem, 3.2vw, 2.75rem);
+  --text-title: clamp(1.875rem, min(3.2vw, 5.5svh), 2.75rem);
   --text-title--line-height: 1.15;
 }
 
 :root {
   /* Height of the fixed header; anchored sections stop right below it. */
   --header-height: 4.25rem;
+  /* Breathing room between the header and a section title after a menu click. */
+  --anchor-gap: 1.25rem;
 }
 
 @media (min-width: 80rem) {
@@ -67,6 +69,52 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
+}
+
+/* A menu click scrolls past most of the section's top padding, so more of the
+   section fits on the screen. */
+:is(#sobre, #atendimentos, #galeria, #procedimentos, #perguntas, #contato) {
+  scroll-margin-top: calc(var(--anchor-gap) - var(--spacing-section));
+}
+
+/* On computers each section reaches at least the bottom of the screen after a menu
+   click, so the next one doesn't peek in. Shorter content is centered. */
+@media (min-width: 64rem) {
+  :root {
+    /* Extra space above the contact card on tall screens (its content is about 33rem). */
+    --contact-extra: max(
+      0px,
+      (100svh - var(--header-height) - var(--anchor-gap) - var(--spacing-section) - 33rem) / 2
+    );
+  }
+
+  :is(#sobre, #atendimentos, #galeria, #procedimentos, #contato) {
+    min-height: calc(100svh - var(--header-height) + var(--spacing-section) - var(--anchor-gap));
+    align-content: center;
+  }
+
+  /* Contacts are centered with a fixed padding instead, because "Perguntas
+     frequentes" needs to know where the card starts. */
+  #contato {
+    align-content: start;
+  }
+
+  #contato > section:first-child {
+    padding-top: calc(var(--spacing-section) + var(--contact-extra));
+  }
+
+  /* "Perguntas frequentes" is the exception: it stops short, so the top of the contact
+     card shows as an invitation to keep scrolling. */
+  #perguntas {
+    --faq-height: calc(
+      100svh - var(--header-height) - var(--anchor-gap) - var(--contact-peek) - var(--contact-extra)
+    );
+    --contact-peek: 5rem;
+    min-height: var(--faq-height);
+    /* Centers the closed list with a fixed padding: opening an answer must only
+       grow the section downwards, never move the questions. */
+    padding-top: max(var(--spacing-section), calc((var(--faq-height) - 23rem) / 2));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

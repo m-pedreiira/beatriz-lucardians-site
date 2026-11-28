@@ -26,23 +26,28 @@ Ao clicar em qualquer link de WhatsApp do site, a conversa abre com esta mensage
 
 ## R2 — Layout mais compacto
 
-- A abertura (hero) mantém a altura no desktop; a moldura da foto fica menor.
+- A abertura (hero) cabe inteira na primeira tela do computador, com a foto sem corte: textos e foto se ajustam à altura da janela.
 - As demais seções ficam mais baixas, com os espaçamentos centralizados em variáveis de CSS.
 
 ## R3 — Menu
 
 - Itens, nesta ordem: Sobre, Atendimentos, Galeria, Procedimentos, Perguntas frequentes, Contatos.
-- Menu sanduíche em telas menores. Ao clicar, o título da seção fica visível abaixo do menu fixo.
+- Menu sanduíche em telas menores. Ao clicar, o título da seção fica visível logo abaixo do menu fixo.
+- Em telas de computador a partir de 730 px de altura, cada seção cabe inteira na tela depois do clique, exceto Sobre e Procedimentos, que continuam para baixo. As demais seções preenchem a tela, sem mostrar o começo da seguinte, exceto Perguntas frequentes, que deixa aparecer o topo do cartão de contato.
 
 ## R4 — Linha do tempo interativa (Atendimentos)
 
 - Uma fase em destaque por vez, escolhida por clique, toque ou teclado.
+- Começa em "Infância" ao abrir o site e sempre que "Atendimentos" é escolhido no menu.
+- Fica claro que dá para clicar: cada ponto da linha mostra uma miniatura da fase, há setas para a fase anterior e a próxima, e a frase "Clique em uma fase para conhecer" aparece acima da linha.
 - As 7 fases e seus textos atuais, sem reescrever. Texto de no mínimo 16 px no celular.
 
 ## R5 — Galeria
 
 - Fica antes de Procedimentos.
-- Fotos e vídeos juntos, em grade, a partir de uma lista de dados, com carregamento sob demanda.
+- Carrossel com a foto do centro em destaque e as vizinhas ao lado, com fotos e vídeos a partir de uma lista de dados e carregamento sob demanda.
+- Passa sozinho, mesmo com o mouse em cima, com botão de pausar. Espera durante o uso por teclado e com a foto ampliada, e não passa quando há "reduzir movimento".
+- Navegação por setas, pontos, arrasto (mouse ou dedo) e teclado.
 - Imagem abre ampliada; fecha por botão, Esc ou clique fora. Vídeo com controles, sem tocar sozinho com som.
 
 ## R6 — Procedimentos em cards
@@ -52,8 +57,9 @@ Ao clicar em qualquer link de WhatsApp do site, a conversa abre com esta mensage
 
 ## R7 — Perguntas frequentes
 
-- Só as perguntas aparecem de início; uma resposta aberta por vez.
+- Só as perguntas aparecem de início. Várias respostas podem ficar abertas; cada uma fecha quando clicada de novo.
 - Abre e fecha somente por clique, toque, Enter ou Espaço (passar o mouse não abre).
+- A tela nunca rola para cima sozinha: a pergunta clicada abre para baixo. A tela só desce, o mínimo necessário, se a resposta passar do fim.
 
 ## R8 — Foto do hero
 
